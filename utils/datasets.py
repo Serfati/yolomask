@@ -197,6 +197,39 @@ class LoadImages:  # for inference
         return self.nf  # number of files
 
 
+class LoadFrame:  # for inference
+    def __init__(self, frame, img_size=640):
+        self.img_size = img_size
+        self.nf = 1  # number of files
+        self.mode = 'image'
+        self.cap = None
+        self.frame = frame
+
+    def __iter__(self):
+        self.count = 0
+        return self
+
+    def __next__(self):
+        if self.count == self.nf:
+            raise StopIteration
+        # Read image
+        self.count += 1
+        img0 = self.frame  # BGR
+        assert img0 is not None, 'Frame Not Loaded '
+        print('image %g/%g: ' % (self.count, self.nf), end='')
+
+        # Padded resize
+        img = letterbox(img0, new_shape=self.img_size)[0]
+
+        # Convert
+        img = img[:, :, ::-1].transpose(2, 0, 1)  # BGR to RGB, to 3x416x416
+        img = np.ascontiguousarray(img)
+
+        return 'path/frame', img, img0, self.cap
+
+    def __len__(self):
+        return self.nf  # number of files
+
 class LoadWebcam:  # for inference
     def __init__(self, pipe='0', img_size=640):
         self.img_size = img_size

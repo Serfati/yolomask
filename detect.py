@@ -89,7 +89,7 @@ def detect(save_img=False, frame=None):
         if classify:
             pred = apply_classifier(pred, modelc, img, im0s)
 
-        # if frame:
+        # if hasattr(frame, img):
         #     os.remove('data/images/inf.jpg')
         #     return pred
 
