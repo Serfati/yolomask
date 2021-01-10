@@ -18,7 +18,6 @@ import torch
 from PIL import Image, ExifTags
 from torch.utils.data import Dataset
 from tqdm import tqdm
-
 from utils.general import xyxy2xywh, xywh2xyxy, clean_str
 from utils.torch_utils import torch_distributed_zero_first
 
@@ -229,6 +228,7 @@ class LoadFrame:  # for inference
 
     def __len__(self):
         return self.nf  # number of files
+
 
 class LoadWebcam:  # for inference
     def __init__(self, pipe='0', img_size=640):

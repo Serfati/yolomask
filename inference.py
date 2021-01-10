@@ -7,7 +7,6 @@ from models.experimental import attempt_load
 from utils.datasets import LoadFrame
 from utils.general import check_img_size, non_max_suppression, set_logging, scale_coords
 from utils.torch_utils import select_device
-from yolomask.utils.plots import plot_one_box
 
 
 class YoloMask:
@@ -79,6 +78,8 @@ class YoloMask:
 
 if __name__ == '__main__':
     class Frame: img = cv2.imread('bibi.jpg')
+
+
     myframe = Frame()
     yolomask = YoloMask()
     detections = yolomask.detect(frame=myframe)
