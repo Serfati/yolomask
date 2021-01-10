@@ -81,8 +81,11 @@ All the needed python packages can be found in the `requirements.txt` file.
 
 - Dataset is split into 2 sets:
 
-|_Set_|Number of images|Objects with mask|Objects without mask| |:--:|:--:|:--:|:--:| |**Training Set**| 2340 | 9050 |
-1586 | |**Validation Set**| 260 | 1005 | 176 | |**Total**|2600|10055|1762|
+|_Set_|Number of images|Objects with mask|Objects without mask| 
+|:--:|:--:|:--:|:--:| 
+|**Training Set**| 2340 | 9050 |1586 | 
+|**Validation Set**| 260 | 1005 | 176 | 
+|**Total**|2600|10055|1762|
 
 <br>
 
@@ -143,6 +146,13 @@ The following options are needed and have default values:
 - `--img-size default=[640, 640]`: image size for training. Images will be resized automatically to this resolution.
   Higher resolutions might lead to significantly longer training times. You can find another detailed guide to create
   your own dataset [here](https://github.com/ultralytics/yolov3/wiki/Train-Custom-Data).
+
+## 🚦 Results:
+All results can be found on 🚀 Weights&Baises Logging platform [here](https://wandb.ai/serfati/YOLOv5/runs/pdi8u78e?workspace=user-serfati).
+
+<img src="https://api.wandb.ai/files/serfati/YOLOv5/pdi8u78e/media/images/Validation_5190_1.jpg" width="520"/> 
+<br>
+<img src="https://api.wandb.ai/files/serfati/YOLOv5/pdi8u78e/media/images/Results_5204_0.png" width="520"/> 
 
 ## ⌨ Scripts:
 
