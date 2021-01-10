@@ -1,8 +1,6 @@
 import argparse
 import time
 from pathlib import Path
-import glob
-import os
 
 import cv2
 import torch
@@ -214,7 +212,7 @@ def detect(save_img=False, frame=None):
 
 if __name__ == '__main__':
     parser = argparse.ArgumentParser()
-    parser.add_argument('--weights', nargs='+', type=str, default='weights/yolomask_1.pt',
+    parser.add_argument('--weights', nargs='+', type=str, default='weights/yolomask.pt',
                         help='model.pt path(s)')  # file/folder, 0 for webcam
     parser.add_argument('--source', type=str, default='0', help='source')
     parser.add_argument('--img-size', type=int, default=640,
@@ -248,10 +246,4 @@ if __name__ == '__main__':
     opt = parser.parse_args()
     print(opt)
 
-    with torch.no_grad():
-        if opt.update:  # update all models (to fix SourceChangeWarning)
-            for opt.weights in ['yolov5s.pt', 'yolov5m.pt', 'yolov5l.pt', 'yolov5x.pt']:
-                detect()
-                strip_optimizer(opt.weights)
-        else:
-            detect()
+    detect()
