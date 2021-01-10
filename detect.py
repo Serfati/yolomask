@@ -10,7 +10,7 @@ from numpy import random
 from models.experimental import attempt_load
 from utils.datasets import LoadStreams, LoadImages
 from utils.general import check_img_size, non_max_suppression, apply_classifier, scale_coords, xyxy2xywh, \
-    strip_optimizer, set_logging, increment_path
+    set_logging, increment_path
 from utils.plots import plot_one_box
 from utils.torch_utils import select_device, load_classifier, time_synchronized
 
@@ -25,7 +25,6 @@ def detect(save_img=False):
                                    exist_ok=opt.exist_ok))  # increment run
     (save_dir / 'labels' if save_txt else save_dir).mkdir(parents=True,
                                                           exist_ok=True)  # make dir
-
     # Initialize
     set_logging()
     device = select_device(opt.device)
@@ -94,7 +93,7 @@ def detect(save_img=False):
             p = Path(p)  # to Path
             save_path = str(save_dir / p.name)  # img.jpg
             txt_path = str(save_dir / 'labels' / p.stem) + \
-                ('' if dataset.mode == 'image' else f'_{frame}')  # img.txt
+                       ('' if dataset.mode == 'image' else f'_{frame}')  # img.txt
             s += '%gx%g ' % img.shape[2:]  # print string
             # normalization gain whwh
             gn = torch.tensor(im0.shape)[[1, 0, 1, 0]]
@@ -109,10 +108,9 @@ def detect(save_img=False):
                     n = (det[:, -1] == c).sum()  # detections per class
                     s += f'{n} {names[int(c)]}s, '  # add to string
 
-                import numpy as np
                 mask_count = (det[:, -1] == 1).sum()
                 nomask_count = (det[:, -1] == 0).sum()
-                ratio = nomask_count/(mask_count+nomask_count)
+                ratio = nomask_count / (mask_count + nomask_count)
                 text = "No-Mask Count: {}  Mask Count: {}".format(
                     nomask_count, mask_count)
                 cv2.putText(
@@ -120,16 +118,16 @@ def detect(save_img=False):
                 if ratio >= 0.51 and nomask_count >= 3:
                     text = "Danger!"
                     cv2.putText(
-                        im0, text, (640-100, 20), cv2.FONT_HERSHEY_SIMPLEX, 0.5, [108, 108, 199], 2)
+                        im0, text, (640 - 100, 20), cv2.FONT_HERSHEY_SIMPLEX, 0.5, [108, 108, 199], 2)
 
                 elif ratio != 0:
                     text = "Warning!"
                     cv2.putText(
-                        im0, text, (640-100, 20), cv2.FONT_HERSHEY_SIMPLEX, 0.5, [117, 209, 230], 2)
+                        im0, text, (640 - 100, 20), cv2.FONT_HERSHEY_SIMPLEX, 0.5, [117, 209, 230], 2)
 
                 else:
                     text = "Safe"
-                    cv2.putText(im0, text, (640-100, 20),
+                    cv2.putText(im0, text, (640 - 100, 20),
                                 cv2.FONT_HERSHEY_SIMPLEX, 0.5, [169, 203, 145], 2)
 
                 # Write results
@@ -160,11 +158,11 @@ def detect(save_img=False):
                             color = (108, 108, 199)
                         else:
                             sys.exit("Label not known")
-                        label = f'{label} {conf*100:.0f}% '
+                        label = f'{label} {conf * 100:.0f}% '
 
                         plot_one_box(xyxy, im0, label=label,
                                      color=color, line_thickness=1)
-            fps = 1/(t2 - t1)
+            fps = 1 / (t2 - t1)
             text = f'FPS {fps:.1f}'
             cv2.putText(im0, text, (20, 50),
                         cv2.FONT_HERSHEY_SIMPLEX, 0.3, border_text_color, 1)

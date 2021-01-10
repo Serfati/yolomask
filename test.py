@@ -201,7 +201,7 @@ def test(data,
                 # target boxes
                 tbox = xywh2xyxy(labels[:, 1:5])
                 scale_coords(img[si].shape[1:], tbox, shapes[si]
-                             [0], shapes[si][1])  # native-space labels
+                [0], shapes[si][1])  # native-space labels
                 if plots:
                     confusion_matrix.process_batch(
                         pred, torch.cat((labels[:, 0:1], tbox), 1))
