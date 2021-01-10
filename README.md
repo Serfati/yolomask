@@ -6,7 +6,7 @@
 <br>
 <br>
 
-Detect Faces with or without mask using [YoloV5](https://github.com/ultralytics/yolov5).
+😷 Detect Faces with or without mask using [YoloV5](https://github.com/ultralytics/yolov5).
 
 ## Description
 
