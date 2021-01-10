@@ -4,8 +4,8 @@ import cv2
 
 from models.experimental import attempt_load
 from utils.datasets import LoadFrame
-from utils.general import check_img_size, non_max_suppression, set_logging, increment_path
-from utils.torch_utils import select_device, time_synchronized
+from utils.general import check_img_size, non_max_suppression, set_logging, scale_coords
+from utils.torch_utils import select_device
 
 
 class YoloMask:
@@ -63,6 +63,8 @@ class YoloMask:
             detections = []
             print(f'Done. ({time.time() - t0:.3f}s)')
             for _,det in enumerate(pred):
+                det[:, :4] = scale_coords(
+                    img.shape[2:], det[:, :4], img0.shape).round()
                 for *xyxy, conf, cls in reversed(det):
                     x1, y1, x2, y2 = xyxy
                     reformat = ((x1.item(), y1.item(), x2.item(), y2.item()),
