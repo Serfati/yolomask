@@ -15,7 +15,7 @@ from utils.plots import plot_one_box
 from utils.torch_utils import select_device, load_classifier, time_synchronized
 
 
-def detect(save_img=False, frame=None):
+def detect(save_img=False):
     source, weights, view_img, save_txt, imgsz = opt.source, opt.weights, opt.view_img, opt.save_txt, opt.img_size
     webcam = source.isnumeric() or source.endswith('.txt') or source.lower().startswith(
         ('rtsp://', 'rtmp://', 'http://'))
@@ -46,11 +46,7 @@ def detect(save_img=False, frame=None):
 
     # Set Dataloader
     vid_path, vid_writer = None, None
-    if frame:
-        cv2.imwrite("data/images/inf.jpg", frame.img)
-        source = 'data/images/inf.jpg'
-        dataset = LoadImages(source, img_size=imgsz)
-    elif webcam:
+    if webcam:
         view_img = True
         cudnn.benchmark = True  # set True to speed up constant image size inference
         dataset = LoadStreams(source, img_size=imgsz)
@@ -86,10 +82,6 @@ def detect(save_img=False, frame=None):
         # Apply Classifier
         if classify:
             pred = apply_classifier(pred, modelc, img, im0s)
-
-        # if hasattr(frame, img):
-        #     os.remove('data/images/inf.jpg')
-        #     return pred
 
         # Process detections
         for i, det in enumerate(pred):  # detections per image

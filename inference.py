@@ -46,7 +46,7 @@ class YoloMask:
         # run once
         _ = self.model(
             img.half() if self.half else img) if self.device.type != 'cpu' else None
-        for _, img, _, _ in dataset:
+        for _, img, img0, _ in dataset:
             img = torch.from_numpy(img).to(self.device)
             img = img.half() if self.half else img.float()  # uint8 to fp16/32
             img /= 255.0  # 0 - 255 to 0.0 - 1.0
@@ -54,13 +54,11 @@ class YoloMask:
                 img = img.unsqueeze(0)
 
             # Inference
-            time_synchronized()
             pred = self.model(img, augment=False)[0]
 
             # Apply NMS
             pred = non_max_suppression(
                 pred, self.conf_thres, self.iou_thres, classes=self.classes, agnostic=False)
-            time_synchronized()
             
             detections = []
             print(f'Done. ({time.time() - t0:.3f}s)')
