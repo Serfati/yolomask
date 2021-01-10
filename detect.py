@@ -1,8 +1,6 @@
 import argparse
 import time
 from pathlib import Path
-import glob
-import os
 
 import cv2
 import torch
@@ -17,7 +15,7 @@ from utils.plots import plot_one_box
 from utils.torch_utils import select_device, load_classifier, time_synchronized
 
 
-def detect(save_img=False, frame=None):
+def detect(save_img=False):
     source, weights, view_img, save_txt, imgsz = opt.source, opt.weights, opt.view_img, opt.save_txt, opt.img_size
     webcam = source.isnumeric() or source.endswith('.txt') or source.lower().startswith(
         ('rtsp://', 'rtmp://', 'http://'))
@@ -48,11 +46,7 @@ def detect(save_img=False, frame=None):
 
     # Set Dataloader
     vid_path, vid_writer = None, None
-    if frame:
-        cv2.imwrite("data/images/inf.jpg", frame.img)
-        source = 'data/images/inf.jpg'
-        dataset = LoadImages(source, img_size=imgsz)
-    elif webcam:
+    if webcam:
         view_img = True
         cudnn.benchmark = True  # set True to speed up constant image size inference
         dataset = LoadStreams(source, img_size=imgsz)
@@ -88,10 +82,6 @@ def detect(save_img=False, frame=None):
         # Apply Classifier
         if classify:
             pred = apply_classifier(pred, modelc, img, im0s)
-
-        # if hasattr(frame, img):
-        #     os.remove('data/images/inf.jpg')
-        #     return pred
 
         # Process detections
         for i, det in enumerate(pred):  # detections per image
@@ -214,7 +204,7 @@ def detect(save_img=False, frame=None):
 
 if __name__ == '__main__':
     parser = argparse.ArgumentParser()
-    parser.add_argument('--weights', nargs='+', type=str, default='weights/yolomask_1.pt',
+    parser.add_argument('--weights', nargs='+', type=str, default='weights/yolomask.pt',
                         help='model.pt path(s)')  # file/folder, 0 for webcam
     parser.add_argument('--source', type=str, default='0', help='source')
     parser.add_argument('--img-size', type=int, default=640,
@@ -248,10 +238,4 @@ if __name__ == '__main__':
     opt = parser.parse_args()
     print(opt)
 
-    with torch.no_grad():
-        if opt.update:  # update all models (to fix SourceChangeWarning)
-            for opt.weights in ['yolov5s.pt', 'yolov5m.pt', 'yolov5l.pt', 'yolov5x.pt']:
-                detect()
-                strip_optimizer(opt.weights)
-        else:
-            detect()
+    detect()
