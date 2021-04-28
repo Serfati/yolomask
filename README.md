@@ -1,4 +1,4 @@
-# **YoloMask**
+# **YoloMask **
 
 <img src="https://in.bgu.ac.il/marketing/graphics/BGU.sig3-he-en-white.png" height="48px" align="right" /> 
 <img src="https://res.cloudinary.com/serfati/image/upload/v1609847964/yolomask_logo.png" height="90"/> 
@@ -7,7 +7,7 @@
 <br>
 
 😷 Detect Faces with or without mask using [YoloV5](https://github.com/ultralytics/yolov5).
-
+v0.1
 ## Description
 
 Automatic systems to detect people wearing masks are becoming more and more important for public health. Be it for
