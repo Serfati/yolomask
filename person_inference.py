@@ -9,16 +9,15 @@ from utils.general import check_img_size, non_max_suppression, set_logging, scal
 from utils.torch_utils import select_device
 
 
-class YoloMask:
+class YoloPerson:
     def __init__(self,
-                 weights='yolomask/weights/yolomask.pt',
+                 weights='yolomask/weights/yolov5s.pt',
                  imgsz=640,
                  device='',
                  conf_thres=0.45,
                  iou_thres=0.5,
                  classes=None):
-        if classes is None:
-            classes = [0, 1]
+        if classes is None: classes = [0]
         self.conf_thres = conf_thres
         self.iou_thres = iou_thres
         self.classes = classes
@@ -70,17 +69,15 @@ class YoloMask:
                 for *xyxy, conf, cls in reversed(det):
                     x1, y1, x2, y2 = xyxy
                     reformat = ((x1.item(), y1.item(), x2.item(), y2.item()),
-                                conf.item(), cls.item())
+                                conf.item())
                     detections.append(reformat)
-            frame.masks = detections
+            frame.persons = detections
             return detections
 
 
 if __name__ == '__main__':
-    class Frame: img = cv2.imread('bibi.jpg')
-
-
+    class Frame: img = cv2.imread('../distance/ptt.jpg')
     myframe = Frame()
-    yolomask = YoloMask()
+    yolomask = YoloPerson()
     detections = yolomask.detect(frame=myframe)
     print(detections)
