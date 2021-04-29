@@ -155,7 +155,7 @@ def detect(save_img=False):
                         else:
                             # sys.exit("Label not known")
                             continue
-                        
+
                         label = f'{label} {conf * 100:.0f}% '
 
                         plot_one_box(xyxy, im0, label=label,

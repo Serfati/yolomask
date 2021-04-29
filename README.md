@@ -1,4 +1,4 @@
-# **YoloMask **
+# **YoloMask**
 
 <img src="https://in.bgu.ac.il/marketing/graphics/BGU.sig3-he-en-white.png" height="48px" align="right" /> 
 <img src="https://res.cloudinary.com/serfati/image/upload/v1609847964/yolomask_logo.png" height="90"/> 
@@ -6,8 +6,8 @@
 <br>
 <br>
 
-😷 Detect Faces with or without mask using [YoloV5](https://github.com/ultralytics/yolov5).
-v0.3
+😷 Detect Faces with or without mask using [YoloV5](https://github.com/ultralytics/yolov5). v0.3
+
 ## Description
 
 Automatic systems to detect people wearing masks are becoming more and more important for public health. Be it for
@@ -81,11 +81,8 @@ All the needed python packages can be found in the `requirements.txt` file.
 
 - Dataset is split into 2 sets:
 
-|_Set_|Number of images|Objects with mask|Objects without mask| 
-|:--:|:--:|:--:|:--:| 
-|**Training Set**| 2340 | 9050 |1586 | 
-|**Validation Set**| 260 | 1005 | 176 | 
-|**Total**|2600|10055|1762|
+|_Set_|Number of images|Objects with mask|Objects without mask| |:--:|:--:|:--:|:--:| |**Training Set**| 2340 | 9050
+|1586 | |**Validation Set**| 260 | 1005 | 176 | |**Total**|2600|10055|1762|
 
 <br>
 
@@ -148,7 +145,9 @@ The following options are needed and have default values:
   your own dataset [here](https://github.com/ultralytics/yolov3/wiki/Train-Custom-Data).
 
 ## 🚦 Results:
-All results can be found on 🚀 Weights&Baises Logging platform [here](https://wandb.ai/serfati/YOLOv5/runs/pdi8u78e?workspace=user-serfati).
+
+All results can be found on 🚀 Weights&Baises Logging
+platform [here](https://wandb.ai/serfati/YOLOv5/runs/pdi8u78e?workspace=user-serfati).
 
 <img src="https://api.wandb.ai/files/serfati/YOLOv5/pdi8u78e/media/images/Validation_5190_1.jpg" width="520"/> 
 <br>

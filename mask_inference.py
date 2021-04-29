@@ -78,6 +78,8 @@ class YoloMask:
 
 if __name__ == '__main__':
     class Frame: img = cv2.imread('bibi.jpg')
+
+
     myframe = Frame()
     yolomask = YoloMask()
     detections = yolomask.detect(frame=myframe)
