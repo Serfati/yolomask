@@ -9,7 +9,7 @@
 😷 Detect Faces with or without mask using [YoloV5](https://github.com/ultralytics/yolov5). v0.3
 
 ## Description
-
+vv
 Automatic systems to detect people wearing masks are becoming more and more important for public health. Be it for
 governments who might want to know how many people are actually wearing masks in crowded places like public trains; or
 businesses who are required by law to enforce the usage of masks within their facilities.
