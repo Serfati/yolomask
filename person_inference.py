@@ -1,6 +1,4 @@
 import time
-
-import cv2
 import torch
 
 from models.experimental import attempt_load
@@ -62,7 +60,6 @@ class YoloPerson:
                 pred, self.conf_thres, self.iou_thres, classes=self.classes, agnostic=False)
 
             detections = []
-            print(f'Done. ({time.time() - t0:.3f}s)')
             for _, det in enumerate(pred):
                 det[:, :4] = scale_coords(
                     img.shape[2:], det[:, :4], img0.shape).round()
@@ -73,13 +70,3 @@ class YoloPerson:
                     detections.append(reformat)
             frame.persons = detections
             return detections
-
-
-if __name__ == '__main__':
-    class Frame: img = cv2.imread('../distance/ptt.jpg')
-
-
-    myframe = Frame()
-    yolomask = YoloPerson()
-    detections = yolomask.detect(frame=myframe)
-    print(detections)

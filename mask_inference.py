@@ -63,7 +63,7 @@ class YoloMask:
                 pred, self.conf_thres, self.iou_thres, classes=self.classes, agnostic=False)
 
             detections = []
-            print(f'Done. ({time.time() - t0:.3f}s)')
+            # print(f'Done. ({time.time() - t0:.3f}s)')
             for _, det in enumerate(pred):
                 det[:, :4] = scale_coords(
                     img.shape[2:], det[:, :4], img0.shape).round()

@@ -215,7 +215,7 @@ class LoadFrame:  # for inference
         self.count += 1
         img0 = self.frame  # BGR
         assert img0 is not None, 'Frame Not Loaded '
-        print('image %g/%g: ' % (self.count, self.nf), end='')
+        # print('image %g/%g: ' % (self.count, self.nf), end='')
 
         # Padded resize
         img = letterbox(img0, new_shape=self.img_size)[0]
