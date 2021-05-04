@@ -1,21 +1,17 @@
 import time
-
-import cv2
 import torch
-
 from models.experimental import attempt_load
 from utils.datasets import LoadFrame
 from utils.general import check_img_size, non_max_suppression, set_logging, scale_coords
 from utils.torch_utils import select_device
-
 
 class YoloMask:
     def __init__(self,
                  weights='yolomask/weights/yolomask.pt',
                  imgsz=640,
                  device='',
-                 conf_thres=0.45,
-                 iou_thres=0.5,
+                 conf_thres=0.4,
+                 iou_thres=0.4,
                  classes=None):
         if classes is None:
             classes = [0, 1]
@@ -63,7 +59,7 @@ class YoloMask:
                 pred, self.conf_thres, self.iou_thres, classes=self.classes, agnostic=False)
 
             detections = []
-            print(f'Done. ({time.time() - t0:.3f}s)')
+            # print(f'Done. ({time.time() - t0:.3f}s)')
             for _, det in enumerate(pred):
                 det[:, :4] = scale_coords(
                     img.shape[2:], det[:, :4], img0.shape).round()
@@ -74,13 +70,3 @@ class YoloMask:
                     detections.append(reformat)
             frame.masks = detections
             return detections
-
-
-if __name__ == '__main__':
-    class Frame: img = cv2.imread('bibi.jpg')
-
-
-    myframe = Frame()
-    yolomask = YoloMask()
-    detections = yolomask.detect(frame=myframe)
-    print(detections)
