@@ -77,6 +77,8 @@ class YoloPerson:
 
 if __name__ == '__main__':
     class Frame: img = cv2.imread('../distance/ptt.jpg')
+
+
     myframe = Frame()
     yolomask = YoloPerson()
     detections = yolomask.detect(frame=myframe)
