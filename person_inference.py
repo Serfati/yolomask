@@ -1,7 +1,6 @@
 import time
 import torch
 import lib.config as globals
-
 from models.experimental import attempt_load
 from utils.datasets import LoadFrame
 from utils.general import check_img_size, non_max_suppression, set_logging, scale_coords
